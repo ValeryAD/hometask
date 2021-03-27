@@ -1,9 +1,17 @@
 package com.epam.automation.fundamentals.maintask;
 
 
+import java.util.Scanner;
+
 public class Greeting {
+    final static String NAME_REQUEST = "Please type in your name";
+    final static String GREETING = "Hello, %s! Nice to meet you!";
 
     public static void main(String[] args){
-        System.out.printf("Hello, %s! Nice to meet you!", args[0]);
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println(NAME_REQUEST);
+
+        System.out.printf(GREETING, sc.nextLine());
     }
 }
