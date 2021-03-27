@@ -1,5 +1,6 @@
 package com.epam.automation.fundamentals.maintask;
 
+//Приветствовать любого пользователя при вводе его имени через командную строку.
 
 import java.util.Scanner;
 

@@ -1,5 +1,9 @@
 package com.epam.automation.fundamentals.maintask;
 
+/*Ввести число от 1 до 12.
+Вывести на консоль название месяца, соответствующего данному числу.
+Осуществить проверку корректности ввода чисел.*/
+
 import java.util.Scanner;
 
 public class MonthByNumber {

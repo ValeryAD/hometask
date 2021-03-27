@@ -1,7 +1,9 @@
 package com.epam.automation.fundamentals.maintask;
 
+//Вывести заданное количество случайных чисел с переходом и без перехода на новую строку
+
 public class RandNumbersOutput {
-    final static int NUMBERS_AMOUNT = 67;
+    final static int NUMBERS_AMOUNT = 18;
     final static int NUMBERS_IN_ROW_ = 5;
 
     public static void main(String[] args) {
