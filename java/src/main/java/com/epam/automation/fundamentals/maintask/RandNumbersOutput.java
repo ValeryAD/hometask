@@ -13,7 +13,5 @@ public class RandNumbersOutput {
                 System.out.println();
             }
         }
-
-
     }
 }

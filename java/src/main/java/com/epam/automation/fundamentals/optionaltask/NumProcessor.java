@@ -263,6 +263,4 @@ public class NumProcessor {
         }
         return sc.nextInt();
     }
-
-
 }
