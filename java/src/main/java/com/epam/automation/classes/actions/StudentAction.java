@@ -5,25 +5,21 @@ import com.epam.automation.classes.entities.*;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+
 public class StudentAction {
 
     private static final int AMOUNT_OF_STUDENTS = 120;
+    private static final int YEAR_OF_BIRTH = 1990;
 
-    public static void main(String[] args) {
-        Student[] students = StudentCreator.generateStudentArr(AMOUNT_OF_STUDENTS);
-        task1(students, Faculty.INFOCOMMUNICATIONS);
-        //task2(students);
-    }
 
-    private static void task1(Student[] students, Faculty faculty) {
+    public static void task1(Student[] students, Faculty faculty) {
 
         Student[] studResult = getStudentsOfFaculty(students, faculty);
-
         StudentPrinter.printArray(studResult);
-        System.out.printf("The faculty of %s has %d students", faculty.getName(), studResult.length);
+        System.out.printf("The faculty of %s has %d students\n", faculty.getName(), studResult.length);
     }
 
-    private static void task2(Student[] students) {
+    public static void task2(Student[] students) {
         Faculty[] faculties = Faculty.values();
         Student[] studOfFaculty;
 
@@ -31,7 +27,7 @@ public class StudentAction {
             studOfFaculty = getStudentsOfFaculty(students, faculty);
             for (int i = 1; i <= Student.MAX_YEAR_OF_STUDY; i++) {
                 System.out.println(StudentPrinter.rowDivider + "\n");
-                System.out.printf("\t\t\tfaculty of %s year of study %d:\n", faculty, i);
+                System.out.printf("\t\t\tfaculty of %s, year of study %d:\n", faculty, i);
                 System.out.println(StudentPrinter.rowDivider + "\n");
                 for (Student student : studOfFaculty) {
                     if (student.getYearOfStudy() == i) {
@@ -44,8 +40,31 @@ public class StudentAction {
     }
 
 
+    public static Student[] task3(Student[] students, int yearOfBirth) {
+        Date minDate = new GregorianCalendar(yearOfBirth + 1, 0, 1).getTime();
+        int counter = 0;
+
+        for (Student st : students) {
+            if (minDate.before(st.getDateOfBirth())) {
+                counter++;
+            }
+        }
+
+        Student[] studResult = new Student[counter];
+        counter = 0;
+
+        for (Student st : students) {
+            if (minDate.before(st.getDateOfBirth())) {
+                studResult[counter++] = st;
+            }
+        }
+
+        return studResult;
+    }
+
     //returns array of students of specified faculty
     private static Student[] getStudentsOfFaculty(Student[] students, Faculty faculty) {
+
         int counter = 0;
 
         for (Student st : students) {
@@ -85,11 +104,11 @@ public class StudentAction {
         return studResult;
     }
 
-    private static Student[] getStudentsOfYearOfStudy(Student[] students, int yearOfStudy){
+    private static Student[] getStudentsOfYearOfStudy(Student[] students, int yearOfStudy) {
         int counter = 0;
 
-        for(Student student : students){
-            if(student.getYearOfStudy() == yearOfStudy){
+        for (Student student : students) {
+            if (student.getYearOfStudy() == yearOfStudy) {
                 counter++;
             }
         }
@@ -97,12 +116,37 @@ public class StudentAction {
         Student[] studResult = new Student[counter];
         counter = 0;
 
-        for(Student student : students){
-            if(student.getYearOfStudy() == yearOfStudy){
-                studResult[counter] = student;
+        for (Student student : students) {
+            if (student.getYearOfStudy() == yearOfStudy) {
+                studResult[counter++] = student;
             }
         }
+        return studResult;
+    }
 
+    public static Student findTheYoungest(Student[] students) {
+        if (students == null) return null;
+
+        Student studResult = students[0];
+
+        for (Student st : students) {
+            if (st != null && st.getDateOfBirth().before(studResult.getDateOfBirth())) {
+                studResult = st;
+            }
+        }
+        return studResult;
+    }
+
+    public static Student findTheOldest(Student[] students) {
+        if (students == null) return null;
+
+        Student studResult = students[0];
+
+        for (Student st : students) {
+            if (st != null && st.getDateOfBirth().after(studResult.getDateOfBirth())) {
+                studResult = st;
+            }
+        }
         return studResult;
     }
 }
