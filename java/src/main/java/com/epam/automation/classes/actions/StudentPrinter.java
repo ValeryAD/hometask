@@ -1,6 +1,8 @@
 package com.epam.automation.classes.actions;
 
+import com.epam.automation.classes.entities.Faculty;
 import com.epam.automation.classes.entities.Student;
+
 
 import java.text.SimpleDateFormat;
 
@@ -21,7 +23,7 @@ public class StudentPrinter {
     }
 
     public static void print(Student st) {
-        if(st == null){
+        if (st == null) {
             System.err.println(rowDivider + "\n" + STUD_IS_NULL_MESSAGE + "\n" + rowDivider);
             return;
         }
@@ -47,7 +49,7 @@ public class StudentPrinter {
 
     public static void printArray(Student[] sts) {
 
-        if(sts == null){
+        if (sts == null) {
             System.err.println(rowDivider + "\n" + STUD_ARRAY_IS_NULL_MESSAGE + "\n" + rowDivider);
             return;
         }
@@ -64,5 +66,23 @@ public class StudentPrinter {
             print(sts[i]);
             System.out.println(rowDivider);
         }
+        System.out.println();
     }
+
+    public static void printAllGroups() {
+        int facultyAmount = Faculty.values().length;
+        StringBuilder sb = new StringBuilder();
+        Student tempSt = new Student();
+        for (int i = 1; i <= StudentCreator.MAX_YEAR_OF_STUDY; i++) {
+            tempSt.setYearOfStudy(i);
+            System.out.print("\t\t");
+            for (int j = 1; j <= facultyAmount; j++) {
+                for (int k = 1; k <= StudentCreator.GROUPS_AMOUNT; k++) {
+                    System.out.printf("%d%d%d\t", StudentAction.countLastDigitOfYearOfAdmission(tempSt), j, k);
+                }
+            }
+            System.out.println();
+        }
+    }
+
 }

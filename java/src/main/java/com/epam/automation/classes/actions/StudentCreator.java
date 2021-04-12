@@ -1,10 +1,8 @@
 package com.epam.automation.classes.actions;
 
-import com.epam.automation.classes.entities.Address;
-import com.epam.automation.classes.entities.Faculty;
-import com.epam.automation.classes.entities.Group;
-import com.epam.automation.classes.entities.Student;
+import com.epam.automation.classes.entities.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Random;
@@ -13,6 +11,8 @@ public class StudentCreator {
     private static final int MAX_APARTMENT_VALUE = 320;
     private static final int MAX_HOUSENUM_VALUE = 120;
     private static final String PHONE_PREFIX = "37529";
+    public static final int GROUPS_AMOUNT = 2;
+    public static final int MAX_YEAR_OF_STUDY = 6;
 
 
     private static Random rand;
@@ -96,12 +96,16 @@ public class StudentCreator {
     }
 
     private static void fillYearOfStudy(Student student) {
-        student.setYearOfStudy(rand.nextInt(Student.MAX_YEAR_OF_STUDY)+1);
+        student.setYearOfStudy(rand.nextInt(MAX_YEAR_OF_STUDY)+1);
     }
 
-    private static void fillGroup(Student student) {
-        Group[] groups = Group.values();
-        student.setGroup(groups[rand.nextInt(groups.length)]);
+
+    //First number is last digit of an admission year, second is ordinal number of faculty, third is number of a group
+    private static void fillGroup(Student student){
+        int firstDigit = StudentAction.countLastDigitOfYearOfAdmission(student);
+
+        student.setGroup(String.valueOf(firstDigit) +
+                (student.getFaculty().ordinal()+1) + (rand.nextInt(GROUPS_AMOUNT) +1));
     }
 
     private static String getRandFromArr(String[] arr){

@@ -10,7 +10,7 @@ public class Manager {
 
     private final static String MAIN_MENU = "Choose item to execute:\n" +
             "1 - TASK 1 \tprint list of student of specified faculty\n" +
-            "2 - TASK 2 \tprint list of student of specified faculty and year of study\n" +
+            "2 - TASK 2 \tprint list of student for every faculty and year of study\n" +
             "3 - TASK 3 \tprint list of student that born after specified year\n" +
             "4 - TASK 4 \tprint list of student of specified group\n" +
             "0 - for exit\n";
@@ -19,7 +19,11 @@ public class Manager {
     private static final String FOR_RETURN = "0 - for return\n";
     private static final String TYPE_YEAR_REQUEST = "type in value of the year (integer value)\n";
     private static final String TYPE_YEAR_MESSAGE = "\nThe youngest student was born in %s, the oldest one in %s\n";
-    private static final int AMOUNT_OF_STUDENTS_TO_GENERATE = 240;
+    private static final int AMOUNT_OF_STUDENTS_TO_GENERATE = 400;
+    private static final String WRONG_GROUP_INPUT = "Type in number of group (three digit integer)";
+    private static final String GROUP_INPUT_REQUEST = "Type in number of a group you wish to print.";
+    private static final String GROUP_OUTPUT_ANNOUNCE = "Next groups exist in our university:\n";
+    private static final String GROUP_NOT_EXISTS_MESSAGE = "\nThere's no group with such number\n";
 
     private static Scanner scanner;
     private static Student[] students;
@@ -111,6 +115,27 @@ public class Manager {
     }
 
     private static void runTask4() {
+        String group = "";
+        System.out.println(GROUP_INPUT_REQUEST);
+        System.out.println(GROUP_OUTPUT_ANNOUNCE);
+        StudentPrinter.printAllGroups();
+
+        do{
+           group = String.valueOf(intInputRequest(WRONG_GROUP_INPUT));
+           if(group.length() == 3){
+               break;
+           }else{
+               System.out.println(WRONG_GROUP_INPUT);
+           }
+        }while(true);
+
+        Student[] studResult = StudentAction.getStudentsOfGroup(students, group);
+
+        if(studResult.length != 0){
+            StudentPrinter.printArray(studResult);
+        }else{
+            System.out.println(GROUP_NOT_EXISTS_MESSAGE);
+        }
 
     }
 
@@ -121,4 +146,5 @@ public class Manager {
         }
         return scanner.nextInt();
     }
+
 }

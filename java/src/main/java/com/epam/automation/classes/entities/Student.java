@@ -1,18 +1,17 @@
 package com.epam.automation.classes.entities;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
 public class Student extends Person {
 
-    public static final int MAX_YEAR_OF_STUDY = 6;
-
     private static long lastId = 0;
     private Date dateOfBirth;
     private Address address;
     private Faculty faculty;
-    private int yearOfStudy;
-    private Group group;
+    private int yearOfStudy; // Курс
+    private String group;
 
     public Student() {
     }
@@ -22,7 +21,7 @@ public class Student extends Person {
     }
 
     public Student(String secondName, String name, String patronymic, Date dateOfBirth,
-                   Address address, Faculty faculty, int yearOfStudy, Group group) {
+                   Address address, Faculty faculty, int yearOfStudy, String group) {
         super(secondName, name, patronymic);
         this.dateOfBirth = dateOfBirth;
         this.address = address;
@@ -68,11 +67,11 @@ public class Student extends Person {
         this.yearOfStudy = yearOfStudy;
     }
 
-    public Group getGroup() {
+    public String getGroup() {
         return group;
     }
 
-    public void setGroup(Group group) {
+    public void setGroup(String group) {
         this.group = group;
     }
 
