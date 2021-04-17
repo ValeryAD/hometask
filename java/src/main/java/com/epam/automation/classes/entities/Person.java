@@ -6,11 +6,11 @@ public abstract class Person {
     private String name;
     private String patronymic;
 
-    protected Person() {
+    public Person() {
         id = getNextId();
     }
 
-    protected Person(String secondName, String name, String patronymic) {
+    public Person(String secondName, String name, String patronymic) {
         this.id = getNextId();
         this.secondName = secondName;
         this.name = name;

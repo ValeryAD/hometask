@@ -2,7 +2,6 @@ package com.epam.automation.classes.actions;
 
 import com.epam.automation.classes.entities.*;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Random;
@@ -76,7 +75,7 @@ public class StudentCreator {
         Address adr = new Address();
         adr.setCity(getRandFromArr(cities));
         adr.setStreet(getRandFromArr(streets));
-        adr.setHouseNum(String.valueOf(rand.nextInt(MAX_HOUSENUM_VALUE+1)));
+        adr.setHouseNumber(String.valueOf(rand.nextInt(MAX_HOUSENUM_VALUE+1)));
         adr.setApartment(String.valueOf(rand.nextInt(MAX_APARTMENT_VALUE + 1)));
         adr.setPhoneNumber(Long.parseLong(PHONE_PREFIX + String.valueOf(rand.nextInt(1000_00_00))));
         student.setAddress(adr);

@@ -1,6 +1,5 @@
 package com.epam.automation.classes.entities;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -82,14 +81,7 @@ public class Student extends Person {
 
         Student student = (Student) obj;
 
-        return this.getId() == student.getId(); // if IDs are equal hence this is the same student
-
-        /*if (!super.equals(student)) return false;
-        if (this.yearOfStudy != student.yearOfStudy) return false;
-         return this.dateOfBirth != null ? this.dateOfBirth.equals(student.dateOfBirth) : student.dateOfBirth == null ||
-                 this.address != null ? this.address.equals(student.address) : student.address == null ||
-                 this.faculty != null ? this.faculty.equals(student.faculty) : student.faculty == null ||
-                 this.group != null ? this.group.equals(student.group) : student.group == null;*/
+        return this.getId() == student.getId();
     }
 
     @Override

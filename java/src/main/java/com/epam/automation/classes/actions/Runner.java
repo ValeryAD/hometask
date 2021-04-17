@@ -6,13 +6,13 @@ import com.epam.automation.classes.entities.Student;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
-public class Manager {
+public class Runner {
 
     private final static String MAIN_MENU = "Choose item to execute:\n" +
-            "1 - TASK 1 \tprint list of student of specified faculty\n" +
-            "2 - TASK 2 \tprint list of student for every faculty and year of study\n" +
-            "3 - TASK 3 \tprint list of student that born after specified year\n" +
-            "4 - TASK 4 \tprint list of student of specified group\n" +
+            "1 - TASK 1 \tprint list of students of specified faculty\n" +
+            "2 - TASK 2 \tprint list of students for every faculty and year of study\n" +
+            "3 - TASK 3 \tprint list of students that born after specified year\n" +
+            "4 - TASK 4 \tprint list of students of specified group\n" +
             "0 - for exit\n";
     private final static String WRONG_INPUT = "Wrong input. Please type in integer value representing item of menu";
     private static final String FACULTY_REQUEST = "\nChoose faculty:\n";
@@ -87,7 +87,7 @@ public class Manager {
                 return;
             } else if (choice > 0 && choice <= faculties.length) {
                 selectedFaculty = faculties[choice - 1];
-                StudentAction.task1(students, selectedFaculty);
+                StudentPrinter.printStudentsOfFaculty(students, selectedFaculty);
             } else {
                 System.out.println(WRONG_INPUT);
             }
@@ -95,13 +95,13 @@ public class Manager {
     }
 
     private static void runTask2() {
-        StudentAction.task2(students);
+        StudentPrinter.printStudentsGroupedByFacultyAndYearOfStudy(students);
     }
 
     private static void runTask3() {
         SimpleDateFormat dformat = new SimpleDateFormat("yyyy");
-        String leastYear = dformat.format(StudentAction.findTheYoungest(students).getDateOfBirth());
-        String greatestYear = dformat.format(StudentAction.findTheOldest(students).getDateOfBirth());
+        String leastYear = dformat.format(StudentAction.findTheYoungestStudent(students).getDateOfBirth());
+        String greatestYear = dformat.format(StudentAction.findTheOldestStudent(students).getDateOfBirth());
         int year = 0;
 
         System.out.printf(TYPE_YEAR_MESSAGE, leastYear, greatestYear);
@@ -111,7 +111,7 @@ public class Manager {
             year = intInputRequest(TYPE_YEAR_REQUEST);
         } while (year < 0);
 
-        StudentPrinter.printArray(StudentAction.task3(students, year));
+        StudentPrinter.printArray(StudentAction.findStudentsBornAfterYear(students, year));
     }
 
     private static void runTask4() {
@@ -129,10 +129,10 @@ public class Manager {
            }
         }while(true);
 
-        Student[] studResult = StudentAction.getStudentsOfGroup(students, group);
+        Student[] studentsOfGroup = StudentAction.getStudentsOfGroup(students, group);
 
-        if(studResult.length != 0){
-            StudentPrinter.printArray(studResult);
+        if(studentsOfGroup.length != 0){
+            StudentPrinter.printArray(studentsOfGroup);
         }else{
             System.out.println(GROUP_NOT_EXISTS_MESSAGE);
         }

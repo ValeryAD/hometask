@@ -4,7 +4,7 @@ public class Address {
 
     private String city;
     private String street;
-    private String houseNum;
+    private String houseNumber;
     private String apartment;
     private long phoneNumber;
 
@@ -14,7 +14,7 @@ public class Address {
     public Address(String city, String street, String houseNumber, String apartment, long phoneNumber) {
         this.city = city;
         this.street = street;
-        this.houseNum = houseNumber;
+        this.houseNumber = houseNumber;
         this.apartment = apartment;
         this.phoneNumber = phoneNumber;
 
@@ -36,12 +36,12 @@ public class Address {
         this.street = street;
     }
 
-    public String getHouseNum() {
-        return houseNum;
+    public String getHouseNumber() {
+        return houseNumber;
     }
 
-    public void setHouseNum(String houseNum) {
-        this.houseNum = houseNum;
+    public void setHouseNumber(String houseNumber) {
+        this.houseNumber = houseNumber;
     }
 
     public String getApartment() {
