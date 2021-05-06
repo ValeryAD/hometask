@@ -55,7 +55,7 @@ public class StudentPrinter {
 
         for (Faculty faculty : faculties) {
             studentOfFaculty = StudentAction.getStudentsOfFaculty(students, faculty);
-            for (int i = 1; i <= StudentCreator.MAX_YEAR_OF_STUDY; i++) {
+            for (int i = 1; i <= StudentGenerator.MAX_YEAR_OF_STUDY; i++) {
                 System.out.println(StudentPrinter.rowDivider + "\n");
                 System.out.printf("\t\t\tfaculty of %s, year of study %d:\n", faculty, i);
                 System.out.println(StudentPrinter.rowDivider + "\n");
@@ -102,11 +102,11 @@ public class StudentPrinter {
         int facultyAmount = Faculty.values().length;
         StringBuilder sb = new StringBuilder();
         Student tempSt = new Student();
-        for (int i = 1; i <= StudentCreator.MAX_YEAR_OF_STUDY; i++) {
+        for (int i = 1; i <= StudentGenerator.MAX_YEAR_OF_STUDY; i++) {
             tempSt.setYearOfStudy(i);
             System.out.print("\t\t");
             for (int j = 1; j <= facultyAmount; j++) {
-                for (int k = 1; k <= StudentCreator.GROUPS_AMOUNT; k++) {
+                for (int k = 1; k <= StudentGenerator.GROUPS_AMOUNT; k++) {
                     System.out.printf("%d%d%d\t", StudentAction.countLastDigitOfYearOfAdmission(tempSt), j, k);
                 }
             }

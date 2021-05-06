@@ -14,13 +14,13 @@ public class Runner {
             "3 - TASK 3 \tprint list of students that born after specified year\n" +
             "4 - TASK 4 \tprint list of students of specified group\n" +
             "0 - for exit\n";
-    private final static String WRONG_INPUT = "Wrong input. Please type in integer value representing item of menu";
-    private static final String FACULTY_REQUEST = "\nChoose faculty:\n";
+    private final static String WRONG_INPUT_MESSAGE = "Wrong input. Please type in integer value representing item of menu";
+    private static final String FACULTY_REQUEST_MESSAGE = "\nChoose faculty:\n";
     private static final String FOR_RETURN = "0 - for return\n";
     private static final String TYPE_YEAR_REQUEST = "type in value of the year (integer value)\n";
     private static final String TYPE_YEAR_MESSAGE = "\nThe youngest student was born in %s, the oldest one in %s\n";
     private static final int AMOUNT_OF_STUDENTS_TO_GENERATE = 400;
-    private static final String WRONG_GROUP_INPUT = "Type in number of group (three digit integer)";
+    private static final String WRONG_GROUP_INPUT_MESSAGE = "Type in number of group (three digit integer)";
     private static final String GROUP_INPUT_REQUEST = "Type in number of a group you wish to print.";
     private static final String GROUP_OUTPUT_ANNOUNCE = "Next groups exist in our university:\n";
     private static final String GROUP_NOT_EXISTS_MESSAGE = "\nThere's no group with such number\n";
@@ -31,7 +31,7 @@ public class Runner {
 
     static {
         scanner = new Scanner(System.in);
-        students = StudentCreator.generateStudentArr(AMOUNT_OF_STUDENTS_TO_GENERATE);
+        students = StudentGenerator.generateStudentArr(AMOUNT_OF_STUDENTS_TO_GENERATE);
     }
 
     public static void main(String[] args) {
@@ -39,7 +39,7 @@ public class Runner {
 
         do {
             System.out.println(MAIN_MENU);
-            choice = intInputRequest(WRONG_INPUT);
+            choice = askUserForChoice(WRONG_INPUT_MESSAGE);
 
             switch (choice) {
                 case 0:
@@ -58,7 +58,7 @@ public class Runner {
                     runTask4();
                     break;
                 default:
-                    System.out.println(WRONG_INPUT);
+                    System.out.println(WRONG_INPUT_MESSAGE);
                     continue;
             }
 
@@ -73,14 +73,14 @@ public class Runner {
         Student[] studResult;
 
         do {
-            System.out.println(FACULTY_REQUEST);
+            System.out.println(FACULTY_REQUEST_MESSAGE);
             choice = 0;
             for (int i = 0; i < faculties.length; i++) {
                 System.out.printf("%d - %s\n", i + 1, faculties[i].getName());
             }
             System.out.println(FOR_RETURN);
 
-            choice = intInputRequest(WRONG_INPUT);
+            choice = askUserForChoice(WRONG_INPUT_MESSAGE);
 
 
             if (choice == 0) {
@@ -89,7 +89,7 @@ public class Runner {
                 selectedFaculty = faculties[choice - 1];
                 StudentPrinter.printStudentsOfFaculty(students, selectedFaculty);
             } else {
-                System.out.println(WRONG_INPUT);
+                System.out.println(WRONG_INPUT_MESSAGE);
             }
         } while (true);
     }
@@ -108,7 +108,7 @@ public class Runner {
 
         do {
             System.out.println(TYPE_YEAR_REQUEST);
-            year = intInputRequest(TYPE_YEAR_REQUEST);
+            year = askUserForChoice(TYPE_YEAR_REQUEST);
         } while (year < 0);
 
         StudentPrinter.printArray(StudentAction.findStudentsBornAfterYear(students, year));
@@ -121,11 +121,11 @@ public class Runner {
         StudentPrinter.printAllGroups();
 
         do{
-           group = String.valueOf(intInputRequest(WRONG_GROUP_INPUT));
+           group = String.valueOf(askUserForChoice(WRONG_GROUP_INPUT_MESSAGE));
            if(group.length() == 3){
                break;
            }else{
-               System.out.println(WRONG_GROUP_INPUT);
+               System.out.println(WRONG_GROUP_INPUT_MESSAGE);
            }
         }while(true);
 
@@ -139,9 +139,9 @@ public class Runner {
 
     }
 
-    private static int intInputRequest(String messageIfWrong) {
+    private static int askUserForChoice(String messageIfWrongInput) {
         while (!scanner.hasNextInt()) {
-            System.out.println(messageIfWrong);
+            System.out.println(messageIfWrongInput);
             scanner.next();
         }
         return scanner.nextInt();

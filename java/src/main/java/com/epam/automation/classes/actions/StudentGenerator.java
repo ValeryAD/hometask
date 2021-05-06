@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Random;
 
-public class StudentCreator {
+public class StudentGenerator {
     private static final int MAX_APARTMENT_VALUE = 320;
     private static final int MAX_HOUSENUM_VALUE = 120;
     private static final String PHONE_PREFIX = "37529";
